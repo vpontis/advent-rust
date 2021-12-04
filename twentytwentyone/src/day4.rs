@@ -105,12 +105,10 @@ pub fn solve_part1(input: &str) -> i32 {
 
     for (board_idx, chunk) in chunks_iter.enumerate() {
         let mut matrix = [[0; 5]; 5];
-        println!("line {}", chunk);
 
         let mut num_to_point = HashMap::new();
 
         for (y, row) in chunk.split("\n").into_iter().enumerate() {
-            println!("row {}", row);
             let col_nums: Vec<i32> = space_re
                 .split(row.trim())
                 .map(|c| { c.parse().unwrap() })
@@ -139,9 +137,6 @@ pub fn solve_part1(input: &str) -> i32 {
     for num in nums {
         for board_idx in 0..boards.len() {
             boards[board_idx].add_num(num);
-            println!("board {} num seen {}",
-                     board_idx,
-                     boards[board_idx].seen_points.len());
 
             if boards[board_idx].is_winner() {
                 println!("WINNNNNNNNNNNNNNNER {}", board_idx);
@@ -174,12 +169,10 @@ pub fn solve_part2(input: &str) -> i32 {
 
     for (board_idx, chunk) in chunks_iter.enumerate() {
         let mut matrix = [[0; 5]; 5];
-        println!("line {}", chunk);
 
         let mut num_to_point = HashMap::new();
 
         for (y, row) in chunk.split("\n").into_iter().enumerate() {
-            println!("row {}", row);
             let col_nums: Vec<i32> = space_re
                 .split(row.trim())
                 .map(|c| { c.parse().unwrap() })
@@ -210,14 +203,12 @@ pub fn solve_part2(input: &str) -> i32 {
     for num in nums {
         for board_idx in 0..boards.len() {
             boards[board_idx].add_num(num);
-            println!("board {} num seen {}",
-                     board_idx,
-                     boards[board_idx].seen_points.len());
 
             if boards[board_idx].is_winner() {
                 winning_boards.insert(board_idx);
 
                 if winning_boards.len() == num_boards {
+                    println!("Last board is {}", boards[board_idx].name);
                     return boards[board_idx].winning_score(num);
                 }
             }
