@@ -202,14 +202,15 @@ pub fn solve_part2(input: &str) -> i32 {
 
     for num in nums {
         for board_idx in 0..boards.len() {
-            boards[board_idx].add_num(num);
+            let board = &mut boards[board_idx];
+            board.add_num(num);
 
-            if boards[board_idx].is_winner() {
+            if board.is_winner() {
                 winning_boards.insert(board_idx);
 
                 if winning_boards.len() == num_boards {
-                    println!("Last board is {}", boards[board_idx].name);
-                    return boards[board_idx].winning_score(num);
+                    println!("Last board is {}", board.name);
+                    return board.winning_score(num);
                 }
             }
         }
